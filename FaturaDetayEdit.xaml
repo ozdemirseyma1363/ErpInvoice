@@ -1,0 +1,47 @@
+﻿<Window x:Class="ErpFatura.FaturaDetayEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ErpFatura"
+        mc:Ignorable="d"
+        Title="Fatura Detay Edit " Height="250" Width="500" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="170">
+                
+            </RowDefinition>
+            <RowDefinition Height="40">
+
+            </RowDefinition>            
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120">                        
+                    </ColumnDefinition>                    
+                    <ColumnDefinition>
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <Label Height="30">No</Label>
+                    <Label Height="30">Stok</Label>
+                    <Label Height="30">Birim Fiyat</Label>                    
+                    <Label Height="30">Miktar</Label>
+                    <Label Height="30">Kdv Oranı</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <Label x:Name="lblNo" Height="30">0</Label>                    
+                    <ComboBox x:Name="cmbStokNo" SelectedValuePath="No" DisplayMemberPath="Ad" Height="30" SelectionChanged="cmbStokNo_SelectionChanged">                        
+                    </ComboBox>
+                    <TextBlock x:Name="txtBirimFiyat" PreviewTextInput="txtBirimFiyat_PreviewTextInput" Height="30"></TextBlock>
+                    <TextBox x:Name="txtMiktar" PreviewTextInput="txtMiktar_PreviewTextInput" Height="30"></TextBox>
+                    <TextBox x:Name="txtKdvOrani" PreviewTextInput="txtKdvOrani_PreviewTextInput" Height="30"></TextBox>
+                </StackPanel>
+            </Grid>
+        </Border>   
+        <Border Grid.Row="1" HorizontalAlignment="Right" Padding="5">
+            <Button x:Name="btnKaydet" Width="120" Click="btnKaydet_Click" Margin="0,0,0,-1">Kaydet</Button>
+        </Border>
+    </Grid>
+</Window>

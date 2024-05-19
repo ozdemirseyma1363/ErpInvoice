@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ErpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cari">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FaturaNumara" Type="varchar" MaxLength="50" />
+          <Property Name="Tarih" Type="datetime" />
+          <Property Name="CariNo" Type="int" />
+          <Property Name="Tutar" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Kdv" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Fatura_Detay">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FaturaNo" Type="int" />
+          <Property Name="StokNo" Type="int" />
+          <Property Name="BirimFiyat" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Miktar" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KdvOrani" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Kdv" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Tutar" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Stok">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="50" />
+          <Property Name="BirimFiyat" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK_Fatura_Cari">
+          <End Role="Cari" Type="Self.Cari" Multiplicity="0..1" />
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cari">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Fatura">
+              <PropertyRef Name="CariNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fatura_Detay_Fatura">
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="0..1" />
+          <End Role="Fatura_Detay" Type="Self.Fatura_Detay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fatura">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Fatura_Detay">
+              <PropertyRef Name="FaturaNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fatura_Detay_Stok">
+          <End Role="Stok" Type="Self.Stok" Multiplicity="0..1" />
+          <End Role="Fatura_Detay" Type="Self.Fatura_Detay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stok">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Fatura_Detay">
+              <PropertyRef Name="StokNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ErpModelStoreContainer">
+          <EntitySet Name="Cari" EntityType="Self.Cari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fatura" EntityType="Self.Fatura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fatura_Detay" EntityType="Self.Fatura_Detay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stok" EntityType="Self.Stok" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Fatura_Cari" Association="Self.FK_Fatura_Cari">
+            <End Role="Cari" EntitySet="Cari" />
+            <End Role="Fatura" EntitySet="Fatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fatura_Detay_Fatura" Association="Self.FK_Fatura_Detay_Fatura">
+            <End Role="Fatura" EntitySet="Fatura" />
+            <End Role="Fatura_Detay" EntitySet="Fatura_Detay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fatura_Detay_Stok" Association="Self.FK_Fatura_Detay_Stok">
+            <End Role="Stok" EntitySet="Stok" />
+            <End Role="Fatura_Detay" EntitySet="Fatura_Detay" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ErpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DataModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cari" EntityType="ErpModel.Cari" />
+          <EntitySet Name="Fatura" EntityType="ErpModel.Fatura" />
+          <EntitySet Name="Fatura_Detay" EntityType="ErpModel.Fatura_Detay" />
+          <EntitySet Name="Stok" EntityType="ErpModel.Stok" />
+          <AssociationSet Name="FK_Fatura_Cari" Association="ErpModel.FK_Fatura_Cari">
+            <End Role="Cari" EntitySet="Cari" />
+            <End Role="Fatura" EntitySet="Fatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fatura_Detay_Fatura" Association="ErpModel.FK_Fatura_Detay_Fatura">
+            <End Role="Fatura" EntitySet="Fatura" />
+            <End Role="Fatura_Detay" EntitySet="Fatura_Detay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fatura_Detay_Stok" Association="ErpModel.FK_Fatura_Detay_Stok">
+            <End Role="Stok" EntitySet="Stok" />
+            <End Role="Fatura_Detay" EntitySet="Fatura_Detay" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cari">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Fatura" Relationship="ErpModel.FK_Fatura_Cari" FromRole="Cari" ToRole="Fatura" />
+        </EntityType>
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FaturaNumara" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Precision="3" />
+          <Property Name="CariNo" Type="Int32" />
+          <Property Name="Tutar" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Kdv" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Cari" Relationship="ErpModel.FK_Fatura_Cari" FromRole="Fatura" ToRole="Cari" />
+          <NavigationProperty Name="Fatura_Detay" Relationship="ErpModel.FK_Fatura_Detay_Fatura" FromRole="Fatura" ToRole="Fatura_Detay" />
+        </EntityType>
+        <EntityType Name="Fatura_Detay">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FaturaNo" Type="Int32" />
+          <Property Name="StokNo" Type="Int32" />
+          <Property Name="BirimFiyat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Miktar" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KdvOrani" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Kdv" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Tutar" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Fatura" Relationship="ErpModel.FK_Fatura_Detay_Fatura" FromRole="Fatura_Detay" ToRole="Fatura" />
+          <NavigationProperty Name="Stok" Relationship="ErpModel.FK_Fatura_Detay_Stok" FromRole="Fatura_Detay" ToRole="Stok" />
+        </EntityType>
+        <EntityType Name="Stok">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BirimFiyat" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Fatura_Detay" Relationship="ErpModel.FK_Fatura_Detay_Stok" FromRole="Stok" ToRole="Fatura_Detay" />
+        </EntityType>
+        <Association Name="FK_Fatura_Cari">
+          <End Type="ErpModel.Cari" Role="Cari" Multiplicity="0..1" />
+          <End Type="ErpModel.Fatura" Role="Fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cari">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Fatura">
+              <PropertyRef Name="CariNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fatura_Detay_Fatura">
+          <End Type="ErpModel.Fatura" Role="Fatura" Multiplicity="0..1" />
+          <End Type="ErpModel.Fatura_Detay" Role="Fatura_Detay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fatura">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Fatura_Detay">
+              <PropertyRef Name="FaturaNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fatura_Detay_Stok">
+          <End Type="ErpModel.Stok" Role="Stok" Multiplicity="0..1" />
+          <End Type="ErpModel.Fatura_Detay" Role="Fatura_Detay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stok">
+              <PropertyRef Name="No" />
+            </Principal>
+            <Dependent Role="Fatura_Detay">
+              <PropertyRef Name="StokNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ErpModelStoreContainer" CdmEntityContainer="DataModel">
+          <EntitySetMapping Name="Cari">
+            <EntityTypeMapping TypeName="ErpModel.Cari">
+              <MappingFragment StoreEntitySet="Cari">
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fatura">
+            <EntityTypeMapping TypeName="ErpModel.Fatura">
+              <MappingFragment StoreEntitySet="Fatura">
+                <ScalarProperty Name="Kdv" ColumnName="Kdv" />
+                <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+                <ScalarProperty Name="CariNo" ColumnName="CariNo" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="FaturaNumara" ColumnName="FaturaNumara" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fatura_Detay">
+            <EntityTypeMapping TypeName="ErpModel.Fatura_Detay">
+              <MappingFragment StoreEntitySet="Fatura_Detay">
+                <ScalarProperty Name="Tutar" ColumnName="Tutar" />
+                <ScalarProperty Name="Kdv" ColumnName="Kdv" />
+                <ScalarProperty Name="KdvOrani" ColumnName="KdvOrani" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+                <ScalarProperty Name="StokNo" ColumnName="StokNo" />
+                <ScalarProperty Name="FaturaNo" ColumnName="FaturaNo" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stok">
+            <EntityTypeMapping TypeName="ErpModel.Stok">
+              <MappingFragment StoreEntitySet="Stok">
+                <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

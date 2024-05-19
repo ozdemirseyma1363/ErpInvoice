@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b1f29475301041cdb7d107bbb8f0d270" Name="Diagram1">
+        <EntityTypeShape EntityType="ErpModel1.Birim" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel1.Cari" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel1.Fatura" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel1.FaturaDetay" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel1.Kullanici" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel1.Stok" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ErpModel1.Tip" Width="1.5" PointX="1.5" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="ErpModel1.FK_Stok_Birim" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel1.FK_Cari_Tip" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel1.FK_Fatura_Cari" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel1.FK_FaturaDetay_Fatura" ManuallyRouted="false" />
+        <AssociationConnector Association="ErpModel1.FK_FaturaDetay_Stok" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,80 @@
+﻿<Window x:Class="ErpFatura.FaturaEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ErpFatura"
+        mc:Ignorable="d"
+        Title="FaturaEdit" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120">
+
+            </RowDefinition>
+            <RowDefinition Height="40">
+
+            </RowDefinition>
+            <RowDefinition>
+
+            </RowDefinition>
+            <RowDefinition Height="40">
+
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120">
+                    </ColumnDefinition>
+                    <ColumnDefinition>
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <Label Height="30">No</Label>
+                    <Label Height="30">Fatura Numarası</Label>
+                    <Label Height="30">Cari Hesap</Label>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <Label x:Name="lblNo" Height="30">0</Label>
+                    <TextBox x:Name="txtFaturaNumara" Height="30" PreviewTextInput="txtFaturaNumara_PreviewTextInput"></TextBox>
+                    <ComboBox x:Name="cmbCariNo" SelectedValuePath="No" DisplayMemberPath="Ad" Height="30">
+
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1"  HorizontalAlignment="Left" Padding="5">
+            <Button x:Name="btnEkle" Width="100" Click="btnEkle_Click" Height="30" VerticalAlignment="Top">Ürün Ekle</Button>
+
+        </Border>
+        <Border Grid.Row="1"  HorizontalAlignment="Right"  Padding="5">
+            <Button x:Name="btnSil" Width="100" Click="btnSil_Click" Height="30" VerticalAlignment="Bottom">Sil</Button>
+
+        </Border>
+        <Border Grid.Row="1"  HorizontalAlignment="Center"  Padding="5">
+            <Button x:Name="btnDuzenle" Width="100" Click="btnDuzenle_Click"  Height="30" VerticalAlignment="Bottom">Düzenle</Button>
+
+        </Border>
+
+        <Border Grid.Row="2">
+            <DataGrid x:Name="lstGrid" SelectedValuePath="No" SelectedCellsChanged="lstGrid_SelectedCellsChanged" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="No" Binding="{Binding No,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Stok" Binding="{Binding Stok,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Birim Fiyat" Binding="{Binding BirimFiyat,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Miktar" Binding="{Binding Miktar,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Kdv Oran" Binding="{Binding KdvOrani,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Kdv Tutar" Binding="{Binding KdvTutar,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Tutar" Binding="{Binding Tutar,Mode=OneWay}" Width="*"/>
+                   
+                    <DataGridTextColumn Header="Toplam" Binding="{Binding Toplam,Mode=OneWay}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Border Grid.Row="3" HorizontalAlignment="Right" Padding="5">
+            <Button x:Name="btnKaydet" Width="120" Click="btnKaydet_Click" Height="30" VerticalAlignment="Top">Kaydet</Button>
+        </Border>
+        <TextBox x:Name="TxtNo" HorizontalAlignment="Left" Text="Selected Index" Margin="2,19,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="noTxt" HorizontalAlignment="Left" Margin="2,5,0,0" Grid.Row="3" TextWrapping="Wrap" Text="Selected Value" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Window>

@@ -1,0 +1,42 @@
+﻿<Window x:Class="ErpFatura.Faturalar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ErpFatura"
+        mc:Ignorable="d"
+        Title="Faturalar" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid>        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50px"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" Padding="10">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnEkle" Width="120" Click="btnEkle_Click" Height="30" VerticalAlignment="Bottom">Ekle</Button>
+                <TextBox x:Name="txtBul" Width="150" KeyDown="txtBul_KeyDown"></TextBox>
+                <Button x:Name="btnBul" Width="120" Click="btnBul_Click">Bul</Button>
+                <Button x:Name="btnSirala" Content=" Sırala" HorizontalAlignment="Right" Click="btnSirala_Click"/>
+            </StackPanel>            
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1" Padding="10">
+            <DataGrid x:Name="lstGrid" AutoGenerateColumns="False"  SelectedCellsChanged="lstGrid_SelectedCellsChanged" SelectedValuePath="No">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="No" Binding="{Binding No,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Fatura Numarası" Binding="{Binding FaturaNumara,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Cari Hesap" Binding="{Binding Cari,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Tarih" Binding="{Binding Tarih,Mode=OneWay}" Width="*"/>
+                    <DataGridTextColumn Header="Tutar" Binding="{Binding Tutar,Mode=OneWay}" Width="*"/>                    
+                </DataGrid.Columns>
+                
+            </DataGrid>
+        </Border>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="btnEdit" Width="120" Margin="5" Click="btnEdit_Click" >Düzenle</Button>
+            <Button x:Name="btnSil" Margin="5" Width="120" Click="btnSil_Click">Sil</Button>
+        
+
+        </StackPanel>
+    </Grid>
+</Window>
